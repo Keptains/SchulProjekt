@@ -6,6 +6,7 @@ import java.util.Scanner;
 import de.bsinfo.Abstractclasses.Enemy;
 import de.bsinfo.Abstractclasses.GameObject;
 import de.bsinfo.Abstractclasses.Player;
+import de.bsinfo.enums.Status;
 
 public class Fight {
 
@@ -34,16 +35,18 @@ public class Fight {
 	}
 
 	private void enemyTurn() {
-		if (enemyRound == enemys.size())
-			enemyRound = 0;
-		// else if (enemys.size() <= 0)
-		// isDeadEnemy();
-		try {
-			enemys.get(enemyRound).angriff(player.get(0));
-		} catch (Exception e) {
+		if (enemys.size() > 0) {
+			if (enemyRound == enemys.size())
+				enemyRound = 0;
+			// else if (enemys.size() <= 0)
+			// isDeadEnemy();
+			try {
+				enemys.get(enemyRound).angriff(player.get(0));
+			} catch (Exception e) {
+			}
+			System.out.println("Greift an: " + enemys.get(enemyRound));
+			++enemyRound;
 		}
-		System.out.println("Greift an: " + enemys.get(enemyRound));
-		++enemyRound;
 	}
 
 	private void playerTurn() {
@@ -52,6 +55,7 @@ public class Fight {
 		System.out.println("Was?");
 		System.out.println("1 = Angriff");
 		System.out.println("2 = Heiltrank");
+		System.out.println("3 = Gift");
 		switch (getAction(player.get(playerRound))) {
 		case 1:
 			System.out.println("P war richtig");
@@ -63,11 +67,17 @@ public class Fight {
 			if (player.get(0).inv.healing.size() > 0) {
 				System.out.println(player.get(0).getlife());
 				player.get(0).inv.healing.get(0).use(player.get(0));
+				player.get(0).inv.healing.remove(0);
 				System.out.println(player.get(0).getlife());
 			} else
 				System.out.println("Keine Tränke übrig!");
 			break;
 		case 3:
+			if (player.get(0).inv.gift.size() > 0) {
+				player.get(0).inv.gift.get(0).use(getTargetEnemy());
+				player.get(0).inv.gift.remove(0);
+			} else
+				System.out.println("Kein Gift übrig!");
 			break;
 		default:
 			System.out.println("Falsche Eingabe");
@@ -126,6 +136,15 @@ public class Fight {
 
 	private void isDeadEnemy() {
 		for (int i = 0; i < enemys.size(); i++) {
+			if (enemys.get(i).getStatus() == Status.Poison) {
+				System.out.println("Leben vor Gift: " + enemys.get(i).getLife());
+				enemys.get(i).setStatusTime(enemys.get(i).getStatusTime() - 1);
+				enemys.get(i).setLife(enemys.get(i).getLife() - enemys.get(i).getTickDamge());
+				System.out.println("Leben nach Gift: " + enemys.get(i).getLife());
+				if (enemys.get(i).getStatusTime() == 0) {
+					enemys.get(i).setStatus(Status.Normal);
+				}
+			}
 			if (enemys.get(i).getlife() <= 0) {
 				System.out.println("Gestorben: " + enemys.get(i));
 				enemys.remove(i);

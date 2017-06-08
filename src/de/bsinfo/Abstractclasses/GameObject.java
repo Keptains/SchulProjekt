@@ -1,15 +1,32 @@
 package de.bsinfo.Abstractclasses;
 
+import de.bsinfo.enums.Status;
+
 public abstract class GameObject implements Faehigkeiten {
 
 	String name;
 
+	Status status = Status.Normal;
+
+	int statusTime = 0;
+	int tickDamge;
+	
 	int maxLife;
 	int atk;
 	int def;
 	int agi;
 	int fas;
 	int life;
+
+	
+	
+	public int getTickDamge() {
+		return tickDamge;
+	}
+
+	public void setTickDamge(int tickDamge) {
+		this.tickDamge = tickDamge;
+	}
 
 	public int getMaxLife() {
 		return maxLife;
@@ -34,6 +51,26 @@ public abstract class GameObject implements Faehigkeiten {
 		this.agi = agi;
 		this.fas = fas;
 		this.life = life;
+	}
+
+	public int getStatusTime() {
+		return statusTime;
+	}
+
+	public void setStatusTime(int statusTime) {
+		this.statusTime = statusTime;
+	}
+
+	public int getLife() {
+		return life;
+	}
+
+	public Status getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public GameObject(int atk, int def, int agi, int fas, int life) {

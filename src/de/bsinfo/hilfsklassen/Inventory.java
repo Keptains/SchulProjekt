@@ -18,6 +18,9 @@ public class Inventory {
 		healing.add(new Heiltrank());
 		healing.add(new Heiltrank());
 		healing.add(new Heiltrank());
+		gift.add(new Gift());
+		gift.add(new Gift());
+		gift.add(new Gift());
 	}
 
 	public ArrayList<Heiltrank> getHealing() {
