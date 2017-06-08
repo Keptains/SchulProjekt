@@ -7,6 +7,7 @@ import de.bsinfo.Abstractclasses.Enemy;
 import de.bsinfo.Abstractclasses.GameObject;
 import de.bsinfo.Abstractclasses.Player;
 import de.bsinfo.enums.Status;
+import de.bsinfo.enums.Tactic;
 
 public class Fight {
 
@@ -38,11 +39,14 @@ public class Fight {
 		if (enemys.size() > 0) {
 			if (enemyRound == enemys.size())
 				enemyRound = 0;
+			
+			System.out.println("ENR: "+enemyRound);
 			// else if (enemys.size() <= 0)
 			// isDeadEnemy();
 			try {
 				enemys.get(enemyRound).angriff(player.get(0));
 			} catch (Exception e) {
+
 			}
 			System.out.println("Greift an: " + enemys.get(enemyRound));
 			++enemyRound;
@@ -52,39 +56,50 @@ public class Fight {
 	private void playerTurn() {
 		if (playerRound == player.size())
 			playerRound = 0;
-		System.out.println("Was?");
-		System.out.println("1 = Angriff");
-		System.out.println("2 = Heiltrank");
-		System.out.println("3 = Gift");
-		switch (getAction(player.get(playerRound))) {
-		case 1:
-			System.out.println("P war richtig");
-			player.get(playerRound).angriff(getTargetEnemy());
-			System.out.println("Nach Angriff: " + enemys.get(0));
-			break;
-		case 2:
-			System.out.println("Du nimmst einen Heiltrank!");
-			if (player.get(0).inv.healing.size() > 0) {
-				System.out.println(player.get(0).getlife());
-				player.get(0).inv.healing.get(0).use(player.get(0));
-				player.get(0).inv.healing.remove(0);
-				System.out.println(player.get(0).getlife());
-			} else
-				System.out.println("Keine Tränke übrig!");
-			break;
-		case 3:
-			if (player.get(0).inv.gift.size() > 0) {
-				player.get(0).inv.gift.get(0).use(getTargetEnemy());
-				player.get(0).inv.gift.remove(0);
-			} else
-				System.out.println("Kein Gift übrig!");
-			break;
-		default:
-			System.out.println("Falsche Eingabe");
-			playerTurn();
-			break;
+		System.out.println("PLR: "+playerRound);
+		if (playerRound == 0) {
+			System.out.println("Was?");
+			System.out.println("1 = Angriff");
+			System.out.println("2 = Heiltrank");
+			System.out.println("3 = Gift");
+			switch (getAction(player.get(playerRound))) {
+			case 1:
+				GameObject target = getTargetEnemy();
+				player.get(playerRound).angriff(target);
+				for (int i = 0; i < player.size(); i++) {
+					player.get(i).setObj(target);
+				}
+				System.out.println("Nach Angriff: " + enemys.get(0));
+				break;
+			case 2:
+				System.out.println("Du nimmst einen Heiltrank!");
+				if (player.get(0).inv.healing.size() > 0) {
+					System.out.println(player.get(0).getlife());
+					player.get(0).inv.healing.get(0).use(player.get(0));
+					player.get(0).inv.healing.remove(0);
+					System.out.println(player.get(0).getlife());
+				} else
+					System.out.println("Keine Tränke übrig!");
+				break;
+			case 3:
+				if (player.get(0).inv.gift.size() > 0) {
+					player.get(0).inv.gift.get(0).use(getTargetEnemy());
+					player.get(0).inv.gift.remove(0);
+				} else
+					System.out.println("Kein Gift übrig!");
+				break;
+			default:
+				System.out.println("Falsche Eingabe");
+				playerTurn();
+				break;
+			}
+		} else {
+			if(player.get(playerRound).getTactic()== Tactic.one_by_one){
+				player.get(playerRound).angriff(player.get(playerRound).getObj());
+			}
+			System.out.println("Companion");
 		}
-
+		++playerRound;
 	}
 
 	private GameObject getTargetEnemy() {

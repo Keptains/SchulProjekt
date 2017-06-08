@@ -1,11 +1,15 @@
 package de.bsinfo.Abstractclasses;
 
 import de.bsinfo.enums.Status;
+import de.bsinfo.enums.Tactic;
 
 public abstract class GameObject implements Faehigkeiten {
 
 	String name;
-
+	
+	
+	GameObject obj;
+	Tactic tactic = Tactic.one_by_one;
 	Status status = Status.Normal;
 
 	int statusTime = 0;
@@ -20,6 +24,22 @@ public abstract class GameObject implements Faehigkeiten {
 
 	
 	
+	public GameObject getObj() {
+		return obj;
+	}
+
+	public void setObj(GameObject obj) {
+		this.obj = obj;
+	}
+
+	public Tactic getTactic() {
+		return tactic;
+	}
+
+	public void setTactic(Tactic tactic) {
+		this.tactic = tactic;
+	}
+
 	public int getTickDamge() {
 		return tickDamge;
 	}

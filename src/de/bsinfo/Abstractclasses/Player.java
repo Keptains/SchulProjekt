@@ -1,12 +1,10 @@
 package de.bsinfo.Abstractclasses;
 
 import de.bsinfo.Item.Equipment;
-import de.bsinfo.Item.Gift;
-import de.bsinfo.Item.Heiltrank;
 import de.bsinfo.hilfsklassen.Inventory;
 
 public abstract class Player extends GameObject {
-
+	
 	int gold = 1000;
 	int level = 1;
 	int exp = 0;
@@ -39,7 +37,10 @@ public abstract class Player extends GameObject {
 		this.weapon = weapon;
 		this.amulet = amulet;
 		setStats();
+		System.out.println("Er macht es auch");
 	}
+	
+	
 
 	@Override
 	public String toString() {
@@ -62,6 +63,8 @@ public abstract class Player extends GameObject {
 				+ amulet.getlife());
 	}
 
+	
+	
 	public int getAtkBase() {
 		return atkBase;
 	}

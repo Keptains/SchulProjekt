@@ -38,11 +38,12 @@ public class TestMain {
 
 		enemys.add(new TestDummyEnemy());
 		enemys.add(new TestDummyEnemy());
-		player.add(
-				new TestDummyPlayer("Hans", helmets.get(0), body.get(0), boots.get(0), weapons.get(0), amulet.get(0)));
+		player.add(new TestDummyPlayer("Hans", helmets.get(0), body.get(0), boots.get(0), weapons.get(0), amulet.get(0)));
 		player.add(companion.get(0));
-		System.out.println(enemys.get(0));
-		System.out.println(player.get(0));
+		System.out.println(player.size());
+		
+		System.out.println("ATK: "+player.get(1).getAtk());
+		System.out.println("ATK Mit: "+player.get(1).getAtkBase());
 
 		Fight fight = new Fight(enemys, player);
 
