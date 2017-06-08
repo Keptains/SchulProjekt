@@ -25,8 +25,6 @@ public abstract class Player extends GameObject {
 	Equipment weapon;
 	Equipment amulet;
 
-//	private static Scanner scan = new Scanner(System.in);
-
 	public Player(String name, int atk, int def, int agi, int fas, int life, Equipment helmet, Equipment body,
 			Equipment boots, Equipment weapon, Equipment amulet) {
 		super(name, atk, def, agi, fas, life);
@@ -40,7 +38,6 @@ public abstract class Player extends GameObject {
 		this.boots = boots;
 		this.weapon = weapon;
 		this.amulet = amulet;
-		fillStartInventory();
 		setStats();
 	}
 
@@ -49,14 +46,6 @@ public abstract class Player extends GameObject {
 		return "Player [atkBase=" + atkBase + ", defBase=" + defBase + ", agiBase=" + agiBase + ", fasBase=" + fasBase
 				+ ", lifeBase=" + lifeBase + ", name=" + name + ", atk=" + atk + ", def=" + def + ", agi=" + agi
 				+ ", fas=" + fas + ", life=" + life + "]";
-	}
-
-	@SuppressWarnings("unchecked")
-	private void fillStartInventory() {
-		for (int i = 0; i < 5; i++) {
-			inv.get(0).add(new Heiltrank());
-			inv.get(1).add(new Gift());
-		}
 	}
 
 	public int getMaxLife() {

@@ -27,9 +27,23 @@ public class Fight {
 		while (fighting) {
 			playerTurn();
 			isDeadEnemy();
-			// enemyTurn();
-			// isDeadPlayer();
+			enemyTurn();
+			System.out.println(player.get(0).getlife());
+			isDeadPlayer();
 		}
+	}
+
+	private void enemyTurn() {
+		if (enemyRound == enemys.size())
+			enemyRound = 0;
+		// else if (enemys.size() <= 0)
+		// isDeadEnemy();
+		try {
+			enemys.get(enemyRound).angriff(player.get(0));
+		} catch (Exception e) {
+		}
+		System.out.println("Greift an: " + enemys.get(enemyRound));
+		++enemyRound;
 	}
 
 	private void playerTurn() {
@@ -37,13 +51,21 @@ public class Fight {
 			playerRound = 0;
 		System.out.println("Was?");
 		System.out.println("1 = Angriff");
+		System.out.println("2 = Heiltrank");
 		switch (getAction(player.get(playerRound))) {
 		case 1:
 			System.out.println("P war richtig");
 			player.get(playerRound).angriff(getTargetEnemy());
-			System.out.println("Nach Angriff: "+enemys.get(0));
+			System.out.println("Nach Angriff: " + enemys.get(0));
 			break;
 		case 2:
+			System.out.println("Du nimmst einen Heiltrank!");
+			if (player.get(0).inv.healing.size() > 0) {
+				System.out.println(player.get(0).getlife());
+				player.get(0).inv.healing.get(0).use(player.get(0));
+				System.out.println(player.get(0).getlife());
+			} else
+				System.out.println("Keine Tränke übrig!");
 			break;
 		case 3:
 			break;
