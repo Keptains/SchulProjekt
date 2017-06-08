@@ -169,33 +169,4 @@ public abstract class Player extends GameObject {
 		this.amulet = amulet;
 	}
 
-//	public int turn() {
-//
-//		System.out.println();
-//		System.out.println("Was willst du tun?");
-//		System.out.println();
-//		System.out.println("1 > Angriff");
-//		System.out.println("2 > Heiltrank");
-//		System.out.println("3 > Gift");
-//		System.out.println();
-//		System.out.print("  > ");
-//		String x = scan.next();
-//		return getPickAction(x); 
-//	}
-
-//	private int getPickAction(String x) {
-//		try {
-//			int p = Integer.parseInt(x);
-//			if (p > 3 || p < 1) {
-//				System.out.println("Ungültige Eingabe!");
-//				return turn();
-//			}
-//			return p;
-//		} catch (Exception e) {
-//			System.out.println();
-//			System.out.println("Ungültige Eingabe!");
-//			return turn();
-//		}
-//	}
-
 }

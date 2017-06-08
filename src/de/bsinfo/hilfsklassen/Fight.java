@@ -39,8 +39,8 @@ public class Fight {
 		if (enemys.size() > 0) {
 			if (enemyRound == enemys.size())
 				enemyRound = 0;
-			
-			System.out.println("ENR: "+enemyRound);
+
+			System.out.println("ENR: " + enemyRound);
 			// else if (enemys.size() <= 0)
 			// isDeadEnemy();
 			try {
@@ -56,7 +56,7 @@ public class Fight {
 	private void playerTurn() {
 		if (playerRound == player.size())
 			playerRound = 0;
-		System.out.println("PLR: "+playerRound);
+		System.out.println("PLR: " + playerRound);
 		if (playerRound == 0) {
 			System.out.println("Was?");
 			System.out.println("1 = Angriff");
@@ -94,8 +94,10 @@ public class Fight {
 				break;
 			}
 		} else {
-			if(player.get(playerRound).getTactic()== Tactic.one_by_one){
+			if (player.get(playerRound).getTactic() == Tactic.one_by_one) {
 				player.get(playerRound).angriff(player.get(playerRound).getObj());
+			} else if (player.get(playerRound).getTactic() == Tactic.one_vs_one) {
+				player.get(playerRound).angriff(getTargetEnemy());
 			}
 			System.out.println("Companion");
 		}
@@ -103,16 +105,23 @@ public class Fight {
 	}
 
 	private GameObject getTargetEnemy() {
-		if (enemys.size() > 1) {
+		if (enemys.size() > 1 && playerRound == 0) {
 			System.out.println("Wen?");
 			for (int i = 0; i < enemys.size(); i++) {
 				System.out.println(i + " = " + enemys.get(i));
 			}
 			return enemyPick(scan.nextLine());
+		} else if (enemys.size() > 1 && playerRound != 0) {
+			for (int i = 0; i < enemys.size(); i++) {
+				if(enemys.get(i)!= player.get(playerRound).getObj()){
+					return enemys.get(i);
+				}
+			}
 		} else {
 			System.out.println(enemys.get(0));
 			return enemys.get(0);
 		}
+		return null;
 	}
 
 	private GameObject enemyPick(String nextLine) {

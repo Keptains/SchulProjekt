@@ -9,7 +9,7 @@ public abstract class GameObject implements Faehigkeiten {
 	
 	
 	GameObject obj;
-	Tactic tactic = Tactic.one_by_one;
+	Tactic tactic = Tactic.one_vs_one;
 	Status status = Status.Normal;
 
 	int statusTime = 0;
@@ -106,7 +106,7 @@ public abstract class GameObject implements Faehigkeiten {
 	public void angriff(GameObject obj) {
 		if ((getAgi() / 2) >= (int) (Math.random() * 100 + 1)) {
 			System.out.println("Crit");
-			int x = getAtk() - ((obj.getDef() / 5) + (obj.getAgi() / 8));
+			int x = getAtk() - ((obj.getDef() / 5));
 			System.out.println("DMG: " + x);
 			obj.setLife(obj.getlife() - (getAtk() * 2 - (obj.getDef() / 7)));
 		} else {

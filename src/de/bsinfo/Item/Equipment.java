@@ -36,7 +36,6 @@ public class Equipment {
 			EquipmentType type, int id) {
 		super();
 		this.name = name;
-		this.beschreibung = beschreibung;
 		this.legendary = legendary;
 		this.atk = atk;
 		this.def = def;

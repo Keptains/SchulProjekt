@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import de.bsinfo.Abstractclasses.Enemy;
 import de.bsinfo.Abstractclasses.Player;
 import de.bsinfo.Item.Equipment;
-import de.bsinfo.PlayKlassen.Companion;
+import de.bsinfo.PlayKlassen.*;
 import de.bsinfo.enums.EquipmentType;
 import de.bsinfo.hilfsklassen.Fight;
 
@@ -38,7 +38,7 @@ public class TestMain {
 
 		enemys.add(new TestDummyEnemy());
 		enemys.add(new TestDummyEnemy());
-		player.add(new TestDummyPlayer("Hans", helmets.get(0), body.get(0), boots.get(0), weapons.get(0), amulet.get(0)));
+		player.add(new Thief("Hans", helmets.get(1), body.get(1), boots.get(1), weapons.get(1), amulet.get(1)));
 		player.add(companion.get(0));
 		System.out.println(player.size());
 		
