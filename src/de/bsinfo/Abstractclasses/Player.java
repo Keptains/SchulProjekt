@@ -1,8 +1,5 @@
 package de.bsinfo.Abstractclasses;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import de.bsinfo.Item.Equipment;
 import de.bsinfo.Item.Gift;
 import de.bsinfo.Item.Heiltrank;
@@ -20,7 +17,7 @@ public abstract class Player extends GameObject {
 	int fasBase;
 	int lifeBase;
 
-	Inventory inv = new Inventory();
+	public Inventory inv = new Inventory();
 
 	Equipment helmet;
 	Equipment body;
@@ -28,7 +25,7 @@ public abstract class Player extends GameObject {
 	Equipment weapon;
 	Equipment amulet;
 
-	Scanner scan = new Scanner(System.in);
+//	private static Scanner scan = new Scanner(System.in);
 
 	public Player(String name, int atk, int def, int agi, int fas, int life, Equipment helmet, Equipment body,
 			Equipment boots, Equipment weapon, Equipment amulet) {
@@ -180,32 +177,33 @@ public abstract class Player extends GameObject {
 		this.amulet = amulet;
 	}
 
-	public int turn(ArrayList<Player> player, ArrayList<Enemy> enemys) {
-		System.out.println();
-		System.out.println("Was willst du tun?");
-		System.out.println();
-		System.out.println("1 > Angriff");
-		System.out.println("2 > Heiltrank");
-		System.out.println("3 > Gift");
-		System.out.println();
-		System.out.print("  > ");
-		String x = scan.nextLine();
-		return getPickAction(x, player, enemys);
-	}
+//	public int turn() {
+//
+//		System.out.println();
+//		System.out.println("Was willst du tun?");
+//		System.out.println();
+//		System.out.println("1 > Angriff");
+//		System.out.println("2 > Heiltrank");
+//		System.out.println("3 > Gift");
+//		System.out.println();
+//		System.out.print("  > ");
+//		String x = scan.next();
+//		return getPickAction(x); 
+//	}
 
-	private int getPickAction(String x, ArrayList<Player> player, ArrayList<Enemy> enemys) {
-		try {
-			int p = Integer.parseInt(x);
-			if(p>3 || p<1){
-				System.out.println("Ungültige Eingabe!");
-				return turn(player, enemys);
-			}
-			return p;
-		} catch (Exception e) {
-			System.out.println();
-			System.out.println("Ungültige Eingabe!");
-			return turn(player, enemys);
-		}
-	}
+//	private int getPickAction(String x) {
+//		try {
+//			int p = Integer.parseInt(x);
+//			if (p > 3 || p < 1) {
+//				System.out.println("Ungültige Eingabe!");
+//				return turn();
+//			}
+//			return p;
+//		} catch (Exception e) {
+//			System.out.println();
+//			System.out.println("Ungültige Eingabe!");
+//			return turn();
+//		}
+//	}
 
 }
