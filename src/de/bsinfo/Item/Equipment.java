@@ -9,6 +9,7 @@ public class Equipment {
 	
 	boolean legendary;
 
+	int id;
 	int atk;
 	int def;
 	int agi;
@@ -29,6 +30,21 @@ public class Equipment {
 		this.fas = fas;
 		this.life = life;
 		this.type = type;
+	}
+	
+	public Equipment(String name, boolean legendary, int atk, int def, int agi, int fas, int life,
+			EquipmentType type, int id) {
+		super();
+		this.name = name;
+		this.beschreibung = beschreibung;
+		this.legendary = legendary;
+		this.atk = atk;
+		this.def = def;
+		this.agi = agi;
+		this.fas = fas;
+		this.life = life;
+		this.type = type;
+		this.id = id;
 	}
 	
 

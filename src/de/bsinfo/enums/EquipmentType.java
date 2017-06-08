@@ -5,5 +5,6 @@ public enum EquipmentType {
 	Body,
 	Boots,
 	Weapon,
-	Amulet
+	Amulet,
+	Companion
 }

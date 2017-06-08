@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import de.bsinfo.Abstractclasses.Enemy;
 import de.bsinfo.Abstractclasses.Player;
 import de.bsinfo.Item.Equipment;
+import de.bsinfo.PlayKlassen.Companion;
 import de.bsinfo.enums.EquipmentType;
 import de.bsinfo.hilfsklassen.Fight;
 
@@ -18,27 +19,31 @@ public class TestMain {
 	static Connection con = null;
 	static Statement stmt;
 	static ResultSet res;
-	
+
 	static ArrayList<Equipment> body = new ArrayList<>();
 	static ArrayList<Equipment> helmets = new ArrayList<>();
 	static ArrayList<Equipment> weapons = new ArrayList<>();
 	static ArrayList<Equipment> boots = new ArrayList<>();
 	static ArrayList<Equipment> amulet = new ArrayList<>();
-	
+
+	static ArrayList<Companion> companion = new ArrayList<>();
+	static ArrayList<Equipment> compRust = new ArrayList<>();
+
 	static ArrayList<Player> player = new ArrayList<>();
 	static ArrayList<Enemy> enemys = new ArrayList<>();
 
 	public static void main(String[] args) {
 
 		loadItems();
-		
+
 		enemys.add(new TestDummyEnemy());
 		enemys.add(new TestDummyEnemy());
-		player.add(new TestDummyPlayer("Hans", helmets.get(0), body.get(0), boots.get(0), weapons.get(0), amulet.get(0)));
-		
+		player.add(
+				new TestDummyPlayer("Hans", helmets.get(0), body.get(0), boots.get(0), weapons.get(0), amulet.get(0)));
+		player.add(companion.get(0));
 		System.out.println(enemys.get(0));
 		System.out.println(player.get(0));
-		
+
 		Fight fight = new Fight(enemys, player);
 
 	}
@@ -49,30 +54,63 @@ public class TestMain {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection(connectionString);
+			loadCompanions();
 			loadAmulet();
 			loadHelmets();
 			loadBody();
 			loadWeapons();
 			loadBoots();
-
-			for (int i = 0; i < helmets.size(); i++) {
-				System.out.println(helmets.get(i));
-				System.out.println();
-				System.out.println(body.get(i));
-				System.out.println();
-				System.out.println(boots.get(i));
-				System.out.println();
-				System.out.println(weapons.get(i));
-				System.out.println();
-				System.out.println(amulet.get(i));
-				System.out.println();
-			}
+			//
+			// for (int i = 0; i < helmets.size(); i++) {
+			// System.out.println(helmets.get(i));
+			// System.out.println();
+			// System.out.println(body.get(i));
+			// System.out.println();
+			// System.out.println(boots.get(i));
+			// System.out.println();
+			// System.out.println(weapons.get(i));
+			// System.out.println();
+			// System.out.println(amulet.get(i));
+			// System.out.println();
+			// }
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
+	private static void loadCompRust() {
+		try {
+			stmt = con.createStatement();
+			res = stmt.executeQuery("SELECT * FROM CompRust");
+			while (res.next()) {
+				compRust.add(new Equipment(res.getString("Name"),
+						/* res.getString("Beschreibung"), */ false, res.getInt("ATK"), res.getInt("DEF"),
+						res.getInt("AGI"), res.getInt("FAS"), res.getInt("HP"), EquipmentType.Companion,
+						res.getInt("ID")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void loadCompanions() {
+		loadCompRust();
+		try {
+//			int id = 0;
+			stmt = con.createStatement();
+			res = stmt.executeQuery("SELECT * FROM Companions");
+			while (res.next()) {
+				companion.add(new Companion(res.getString("Name"), res.getInt("ATK"), res.getInt("DEF"),
+						res.getInt("AGI"), res.getInt("FAS"), res.getInt("Life"), compRust.get(0),
+						compRust.get(1), compRust.get(2), compRust.get(3), compRust.get(4)));
+//				id += 5;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static void loadAmulet() {
 		try {
 			stmt = con.createStatement();
