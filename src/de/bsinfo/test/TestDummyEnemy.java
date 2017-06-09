@@ -8,7 +8,7 @@ public class TestDummyEnemy extends Enemy{
 	String name = "TestDummy";
 
 	public TestDummyEnemy() {
-		super(20, 20, 20, 20, 200);
+		super(20, 20, 20, 20, 200, 150);
 	}
 
 	@Override

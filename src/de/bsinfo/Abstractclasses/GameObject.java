@@ -22,36 +22,6 @@ public abstract class GameObject implements Faehigkeiten {
 	int fas;
 	int life;
 
-	
-	
-	public GameObject getObj() {
-		return obj;
-	}
-
-	public void setObj(GameObject obj) {
-		this.obj = obj;
-	}
-
-	public Tactic getTactic() {
-		return tactic;
-	}
-
-	public void setTactic(Tactic tactic) {
-		this.tactic = tactic;
-	}
-
-	public int getTickDamge() {
-		return tickDamge;
-	}
-
-	public void setTickDamge(int tickDamge) {
-		this.tickDamge = tickDamge;
-	}
-
-	public int getMaxLife() {
-		return maxLife;
-	}
-
 	public GameObject(String name, int atk, int def, int agi, int fas, int life) {
 		// super();
 		this.name = name;
@@ -164,6 +134,34 @@ public abstract class GameObject implements Faehigkeiten {
 		this.life = life;
 	}
 
+	public GameObject getObj() {
+		return obj;
+	}
+
+	public void setObj(GameObject obj) {
+		this.obj = obj;
+	}
+
+	public Tactic getTactic() {
+		return tactic;
+	}
+
+	public void setTactic(Tactic tactic) {
+		this.tactic = tactic;
+	}
+
+	public int getTickDamge() {
+		return tickDamge;
+	}
+
+	public void setTickDamge(int tickDamge) {
+		this.tickDamge = tickDamge;
+	}
+
+	public int getMaxLife() {
+		return maxLife;
+	}
+	
 }
 
 interface Faehigkeiten {

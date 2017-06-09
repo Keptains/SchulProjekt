@@ -15,6 +15,7 @@ public class Fight {
 
 	boolean fighting = true;
 	ArrayList<Enemy> enemys;
+	ArrayList<Enemy> enemysDead = new ArrayList<>();;
 	ArrayList<Player> player;
 	int playerRound = 0;
 	int enemyRound = 0;
@@ -33,6 +34,13 @@ public class Fight {
 			System.out.println(player.get(0).getlife());
 			isDeadPlayer();
 		}
+		if (player.size() > 0) {
+			System.out.println("YAY Sieg!");
+			// System.out.println(player.get(index));
+			for (Enemy x : enemysDead)
+				player.get(0).setExp(player.get(0).getExp() + x.getExp());
+			while(player.get(0).getExpLevel());
+		}
 	}
 
 	private void enemyTurn() {
@@ -48,7 +56,7 @@ public class Fight {
 			} catch (Exception e) {
 
 			}
-			System.out.println("Greift an: " + enemys.get(enemyRound));
+			// System.out.println("Greift an: " + enemys.get(enemyRound));
 			++enemyRound;
 		}
 	}
@@ -62,6 +70,7 @@ public class Fight {
 			System.out.println("1 = Angriff");
 			System.out.println("2 = Heiltrank");
 			System.out.println("3 = Gift");
+			System.out.println("4 = Faehigkeiten");
 			switch (getAction(player.get(playerRound))) {
 			case 1:
 				GameObject target = getTargetEnemy();
@@ -88,6 +97,11 @@ public class Fight {
 				} else
 					System.out.println("Kein Gift übrig!");
 				break;
+			case 4:
+				if (player.get(playerRound).getLevel() > 0) {
+					player.get(playerRound).ability1(getTargetEnemy());
+				}
+				break;
 			default:
 				System.out.println("Falsche Eingabe");
 				playerTurn();
@@ -113,7 +127,7 @@ public class Fight {
 			return enemyPick(scan.nextLine());
 		} else if (enemys.size() > 1 && playerRound != 0) {
 			for (int i = 0; i < enemys.size(); i++) {
-				if(enemys.get(i)!= player.get(playerRound).getObj()){
+				if (enemys.get(i) != player.get(playerRound).getObj()) {
 					return enemys.get(i);
 				}
 			}
@@ -171,6 +185,7 @@ public class Fight {
 			}
 			if (enemys.get(i).getlife() <= 0) {
 				System.out.println("Gestorben: " + enemys.get(i));
+				enemysDead.add(enemys.get(i));
 				enemys.remove(i);
 				if (enemys.isEmpty())
 					fighting = false;

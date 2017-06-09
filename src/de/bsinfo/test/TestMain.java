@@ -46,6 +46,12 @@ public class TestMain {
 		System.out.println("ATK Mit: "+player.get(1).getAtkBase());
 
 		Fight fight = new Fight(enemys, player);
+		System.out.println(enemys.size());
+		enemys.add(new TestDummyEnemy());
+		enemys.add(new TestDummyEnemy());
+		System.out.println(enemys.size());
+		fight = new Fight(enemys, player);
+		fight = new Fight(enemys, player);
 
 	}
 

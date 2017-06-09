@@ -4,16 +4,20 @@ import de.bsinfo.Item.Equipment;
 import de.bsinfo.hilfsklassen.Inventory;
 
 public abstract class Player extends GameObject {
-	
+
 	int gold = 1000;
-	int level = 1;
+	int level = 0;
 	int exp = 0;
+
+	int[] levels = { 100, 250, 500, 800, 1150 };
 
 	int atkBase;
 	int defBase;
 	int agiBase;
 	int fasBase;
 	int lifeBase;
+
+	boolean[] abilitys = { false, false, false, false };
 
 	public Inventory inv = new Inventory();
 
@@ -39,8 +43,6 @@ public abstract class Player extends GameObject {
 		setStats();
 		System.out.println("Er macht es auch");
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -63,8 +65,6 @@ public abstract class Player extends GameObject {
 				+ amulet.getlife());
 	}
 
-	
-	
 	public int getAtkBase() {
 		return atkBase;
 	}
@@ -111,6 +111,27 @@ public abstract class Player extends GameObject {
 
 	public void setGold(int gold) {
 		this.gold = gold;
+	}
+
+	public boolean getExpLevel() {
+		System.out.println("EXP: " + getExp());
+		if (getExp() >= levels[getLevel()]) {
+			System.out.println("YAY Level up");
+			setLevel(getLevel() + 1);
+			System.out.println("Neues Level: " + getLevel());
+			switch (getLevel()) {
+			case 1:
+				System.out.println("YAY LOL Erlernt");
+				abilitys[0] = true;
+				break;
+
+			case 5:
+				System.out.println("NAy");
+				break;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public int getLevel() {

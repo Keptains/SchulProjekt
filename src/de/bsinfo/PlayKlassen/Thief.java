@@ -3,6 +3,7 @@ package de.bsinfo.PlayKlassen;
 import de.bsinfo.Abstractclasses.GameObject;
 import de.bsinfo.Abstractclasses.Player;
 import de.bsinfo.Item.Equipment;
+import de.bsinfo.enums.Status;
 
 public class Thief extends Player{
 
@@ -13,20 +14,23 @@ public class Thief extends Player{
 	public void angriff(GameObject obj) {
 		if ((getAgi()) >= (int) (Math.random() * 100 + 1)) {
 			System.out.println("Crit");
-			int x = getAtk() - ((obj.getDef() / 10));
+			int x = getAgi() - ((obj.getDef() / 10));
 			System.out.println("DMG: " + x);
-			obj.setLife(obj.getlife() - (getAtk() * 2 - (obj.getDef() / 7)));
+			obj.setLife(obj.getlife() - (getAgi() * 2 - (obj.getDef() / 7)));
 		} else {
-			int x = (getAtk() - ((obj.getDef() / 3) + (obj.getAgi() / 8)));
+			int x = (getAgi() - ((obj.getDef() / 3) + (obj.getAgi() / 8)));
 			System.out.println("DMG: " + x);
-			obj.setLife(obj.getlife() - (getAtk() - ((obj.getDef() / 5) + (obj.getAgi() / 8))));
+			obj.setLife(obj.getlife() - (getAgi() - ((obj.getDef() / 5) + (obj.getAgi() / 8))));
 		}
 	}
 
 	@Override
 	public void ability1(GameObject obj) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Giftpfeil");
+		angriff(obj);
+		obj.setStatus(Status.Poison);
+		obj.setTickDamge(10);
+		obj.setStatusTime(5);
 	}
 
 	@Override
