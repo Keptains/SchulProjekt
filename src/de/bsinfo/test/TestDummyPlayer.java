@@ -8,7 +8,7 @@ public class TestDummyPlayer extends Player {
 
 	public TestDummyPlayer(String name, Equipment helmet, Equipment body,
 			Equipment boots, Equipment weapon, Equipment amulet) {
-		super(name, 20, 30, 12, 10, 160, helmet, body, boots, weapon, amulet);
+		super(name, 20, 30, 12, 10, 200, helmet, body, boots, weapon, amulet, true);
 	}
 
 	@Override

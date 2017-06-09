@@ -8,6 +8,8 @@ public abstract class Player extends GameObject {
 	int gold = 1000;
 	int level = 0;
 	int exp = 0;
+	
+	boolean player;
 
 	int[] levels = { 100, 250, 500, 800, 1150 };
 
@@ -28,7 +30,7 @@ public abstract class Player extends GameObject {
 	Equipment amulet;
 
 	public Player(String name, int atk, int def, int agi, int fas, int life, Equipment helmet, Equipment body,
-			Equipment boots, Equipment weapon, Equipment amulet) {
+			Equipment boots, Equipment weapon, Equipment amulet, boolean player) {
 		super(name, atk, def, agi, fas, life);
 		this.atkBase = atk;
 		this.defBase = def;
@@ -40,6 +42,7 @@ public abstract class Player extends GameObject {
 		this.boots = boots;
 		this.weapon = weapon;
 		this.amulet = amulet;
+		this.player = player;
 		setStats();
 		System.out.println("Er macht es auch");
 	}
@@ -63,6 +66,10 @@ public abstract class Player extends GameObject {
 		setFas(getFasBase() + helmet.getFas() + body.getFas() + boots.getFas() + weapon.getFas() + amulet.getFas());
 		setLife(getLifeBase() + helmet.getlife() + body.getlife() + boots.getlife() + weapon.getlife()
 				+ amulet.getlife());
+	}
+	
+	public boolean getPlayer(){
+		return player;
 	}
 
 	public int getAtkBase() {

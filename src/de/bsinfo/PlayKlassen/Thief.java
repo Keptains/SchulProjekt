@@ -8,7 +8,7 @@ import de.bsinfo.enums.Status;
 public class Thief extends Player{
 
 	public Thief(String name, Equipment helmet, Equipment body, Equipment boots, Equipment weapon, Equipment amulet) {
-		super(name, 20, 5, 30, 10, 90, helmet, body, boots, weapon, amulet);
+		super(name, 20, 5, 30, 10, 90, helmet, body, boots, weapon, amulet, true);
 	}
 	
 	public void angriff(GameObject obj) {

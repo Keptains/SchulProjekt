@@ -38,21 +38,18 @@ public class TestMain {
 
 		enemys.add(new TestDummyEnemy());
 		enemys.add(new TestDummyEnemy());
-		player.add(new Thief("Hans", helmets.get(1), body.get(1), boots.get(1), weapons.get(1), amulet.get(1)));
+//		player.add(new Thief("Hans", helmets.get(1), body.get(1), boots.get(1), weapons.get(1), amulet.get(1)));
+		player.add(new TestDummyPlayer("Hans", helmets.get(0), body.get(0), boots.get(0), weapons.get(0), amulet.get(0)));
 		player.add(companion.get(0));
 		System.out.println(player.size());
-		
-		System.out.println("ATK: "+player.get(1).getAtk());
-		System.out.println("ATK Mit: "+player.get(1).getAtkBase());
+
+		System.out.println("ATK: " + player.get(1).getAtk());
+		System.out.println("ATK Mit: " + player.get(1).getAtkBase());
 
 		Fight fight = new Fight(enemys, player);
-		System.out.println(enemys.size());
 		enemys.add(new TestDummyEnemy());
-		enemys.add(new TestDummyEnemy());
-		System.out.println(enemys.size());
 		fight = new Fight(enemys, player);
-		fight = new Fight(enemys, player);
-
+		System.out.println(player.get(0));
 	}
 
 	private static void loadItems() {
@@ -104,14 +101,15 @@ public class TestMain {
 	private static void loadCompanions() {
 		loadCompRust();
 		try {
-//			int id = 0;
+			// int id = 0;
 			stmt = con.createStatement();
 			res = stmt.executeQuery("SELECT * FROM Companions");
 			while (res.next()) {
-				companion.add(new Companion(res.getString("Name"), res.getInt("ATK"), res.getInt("DEF"),
-						res.getInt("AGI"), res.getInt("FAS"), res.getInt("Life"), compRust.get(0),
+				companion.add(new Companion(res.getString("Name"),
+						-20 /* res.getInt("ATK") */, res.getInt("DEF"),
+						-20/* res.getInt("AGI") */, res.getInt("FAS"), 10000/*(res.getInt("Life")*/, compRust.get(0),
 						compRust.get(1), compRust.get(2), compRust.get(3), compRust.get(4)));
-//				id += 5;
+				// id += 5;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

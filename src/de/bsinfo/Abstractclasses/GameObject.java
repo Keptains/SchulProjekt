@@ -78,7 +78,7 @@ public abstract class GameObject implements Faehigkeiten {
 			System.out.println("Crit");
 			int x = getAtk() - ((obj.getDef() / 5));
 			System.out.println("DMG: " + x);
-			obj.setLife(obj.getlife() - (getAtk() * 2 - (obj.getDef() / 7)));
+			obj.setLife(obj.getlife() - (getAtk() * 2 - (obj.getDef() / 5)));
 		} else {
 			int x = (getAtk() - ((obj.getDef() / 5) + (obj.getAgi() / 8)));
 			System.out.println("DMG: " + x);

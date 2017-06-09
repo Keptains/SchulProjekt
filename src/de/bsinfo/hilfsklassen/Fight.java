@@ -29,6 +29,7 @@ public class Fight {
 	private void startFight() {
 		while (fighting) {
 			playerTurn();
+			// isDeadPlayer();
 			isDeadEnemy();
 			enemyTurn();
 			System.out.println(player.get(0).getlife());
@@ -39,7 +40,8 @@ public class Fight {
 			// System.out.println(player.get(index));
 			for (Enemy x : enemysDead)
 				player.get(0).setExp(player.get(0).getExp() + x.getExp());
-			while(player.get(0).getExpLevel());
+			while (player.get(0).getExpLevel())
+				;
 		}
 	}
 
@@ -47,7 +49,6 @@ public class Fight {
 		if (enemys.size() > 0) {
 			if (enemyRound == enemys.size())
 				enemyRound = 0;
-
 			System.out.println("ENR: " + enemyRound);
 			// else if (enemys.size() <= 0)
 			// isDeadEnemy();
@@ -61,11 +62,12 @@ public class Fight {
 		}
 	}
 
-	private void playerTurn() {
+	private boolean playerTurn() {
 		if (playerRound == player.size())
 			playerRound = 0;
-		System.out.println("PLR: " + playerRound);
-		if (playerRound == 0) {
+		if (player.get(playerRound).getPlayer()) {
+			System.out.println("Spieler");
+			System.out.println("Leben: " + player.get(playerRound).getlife());
 			System.out.println("Was?");
 			System.out.println("1 = Angriff");
 			System.out.println("2 = Heiltrank");
@@ -87,15 +89,19 @@ public class Fight {
 					player.get(0).inv.healing.get(0).use(player.get(0));
 					player.get(0).inv.healing.remove(0);
 					System.out.println(player.get(0).getlife());
-				} else
+				} else {
 					System.out.println("Keine Tränke übrig!");
+					return playerTurn();
+				}
 				break;
 			case 3:
 				if (player.get(0).inv.gift.size() > 0) {
 					player.get(0).inv.gift.get(0).use(getTargetEnemy());
 					player.get(0).inv.gift.remove(0);
-				} else
+				} else {
 					System.out.println("Kein Gift übrig!");
+					return playerTurn();
+				}
 				break;
 			case 4:
 				if (player.get(playerRound).getLevel() > 0) {
@@ -104,8 +110,8 @@ public class Fight {
 				break;
 			default:
 				System.out.println("Falsche Eingabe");
-				playerTurn();
-				break;
+				return playerTurn();
+			// break;
 			}
 		} else {
 			if (player.get(playerRound).getTactic() == Tactic.one_by_one) {
@@ -116,10 +122,11 @@ public class Fight {
 			System.out.println("Companion");
 		}
 		++playerRound;
+		return true;
 	}
 
 	private GameObject getTargetEnemy() {
-		if (enemys.size() > 1 && playerRound == 0) {
+		if (enemys.size() > 1 && player.get(playerRound).getPlayer()) {
 			System.out.println("Wen?");
 			for (int i = 0; i < enemys.size(); i++) {
 				System.out.println(i + " = " + enemys.get(i));
